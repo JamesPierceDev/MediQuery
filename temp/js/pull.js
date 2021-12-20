@@ -2,7 +2,7 @@
 //@Started - 28/01/2020
 //@Brief - JS Script that pulls data from Google cloud firestore
 
-//Firebase app config data
+    //Firebase app config data
 let firebaseConfig = {
     apiKey: "AIzaSyDrHxIx-NJh8LxhNa1jw9zu1Y6EZOdv4Kk",
     authDomain: "mediquery-430f7.firebaseapp.com",
@@ -14,10 +14,6 @@ let firebaseConfig = {
     measurementId: "G-KS13F48QGP"
 };
 
-//Manually require firestore usage
-const firebase = require("firebase");
-require("firebase/firestore");
-
 //Initialize firebase using app config data
 firebase.initializeApp({
     apiKey: firebaseConfig.apiKey,
@@ -26,9 +22,34 @@ firebase.initializeApp({
 });
 
 //Request data from firestore collection
-let db = firebase.firestore();
-db.collection("efr").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        console.log('${doc.id} => ${doc.data()}');
-    });
+this.db = firebase.firestore();
+this.level = sessionStorage.level;
+this.docs = null;
+this.index = 0;
+
+this.db.collection("efr").get().then((querySnapshot) => {
+    docs = querySnapshot.docs;
+})
+.catch((error) => {
+    console.log("Error querying database - QuizManager.QueryDatabase", error);
 });
+
+if (docs != null)
+{
+    console.log("docs is not NULL");
+    index = Utils.GenerateRandomInRange(docs.size);
+    let currentDoc = docs[index];
+    
+    var ID = currentDoc.id;
+    var data = currentDoc.data();
+    console.log("DB: " + ID + " " + data.question);
+    document.getElementById("question").innerHTML = data.question;
+    document.getElementById("answer1").innerHTML = data.answer1;
+    document.getElementById("answer2").innerHTML = data.answer2;
+    document.getElementById("answer3").innerHTML = data.answer3;
+    document.getElementById("answer4").innerHTML = data.answer4;
+}
+else
+{
+    console.log("docs is NULL");
+}

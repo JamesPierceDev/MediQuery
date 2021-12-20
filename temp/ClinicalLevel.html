@@ -1,7 +1,10 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 
+<script src="js/jquery.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
 <html>
     <nav class="navbar-light bg-light">
@@ -14,25 +17,25 @@
 
     <body>
         <div class="container">
-            <div class="jumbotron">
-                <h1 class="display-4">Select your clinical level</h1>
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="TestType.html" role="button">First Aid Responder</a>
-                    <br></br>
-                    <a class="btn btn-success btn-lg" href="TestType.html" role="button">Emergency First Responder</a>
-                    <br></br>
-                    <a class="btn btn-danger btn-lg" href="TestType.html" role="button">Emergency Medical Technician</a>
-                </p>
+            <h1 class="display-4">Select your clinical level</h1>
+            <div class="row justify-content-evenly" style="height: 100px;">
+                <div class="col-sm-3" style="text-align: center; height: 100%;" >
+                    <a class="btn btn-warning btn-lg" href="TestType.html" role="button" 
+                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'cfr')} WriteToSessionStorage();">CFR</a>
+                </div>
+                <div class="col-sm-3" style="text-align: center; height: 100%;">
+                    <a class="btn btn-danger btn-lg" href="TestType.html" role="button"
+                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'far')} WriteToSessionStorage();">FAR</a>
+                </div>
+                <div class="col-sm-3" style="text-align: center; height: 100%;">
+                    <a class="btn btn-success btn-lg" href="TestType.html" role="button"
+                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'efr')} WriteToSessionStorage()">EFR</a>
+                </div>
+                <div class="col-sm-3" style="text-align: center; height: 100%;">
+                    <a class="btn btn-primary btn-lg" href="TestType.html" role="button"
+                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'emt')} WriteToSessionStorage();">EMT</a>
+                </div>
             </div>
         </div>
-        <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
-
-        <!-- TODO: Add SDKs for Firebase products that you want to use
-        https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="/__/firebase/7.7.0/firebase-analytics.js"></script>
-
-        <!-- Initialize Firebase -->
-        <script src="/__/firebase/init.js"></script>
     </body>
 </html>
