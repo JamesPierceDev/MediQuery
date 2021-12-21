@@ -64,6 +64,7 @@
             let index = 0;
             let dataArray = [];
             let correctAnswers = 0;
+            let selectedAnswer = "";
             
             db.collection(level.toString()).limit(size).get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
@@ -82,19 +83,16 @@
                 methods: {
                     checkAnswer : function (answer) {
                         document.getElementById("nextButton").disabled = false;
-                        if (answer === dataArray[index].correct)
-                        {
-                            console.log("Correct answer");
-                            correctAnswers++;
-                        }
-                        else
-                        {
-                            console.log("Incorrect answer");
-                        }
+                        selectedAnswer = answer;
                     },
                     next : function () {
                         if (index < dataArray.length - 1)
                         {
+                            if (selectedAnswer == dataArray[index].correct)
+                            {
+                                console.log("Correct answer");
+                                correctAnswers++;
+                            }
                             index++;
                             this.question = dataArray[index].question;
                             this.answerA = dataArray[index].answer1;
@@ -105,6 +103,12 @@
                         }
                         else
                         {
+                            if (selectedAnswer == dataArray[index -1].correct)
+                            {
+                                console.log("Correct answer");
+                                correctAnswers++;
+                            }
+
                             console.log("User scored: " + correctAnswers + "/" + dataArray.length);
                             alert("User scored: " + correctAnswers + "/" + dataArray.length);
                         }
