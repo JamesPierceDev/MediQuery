@@ -20,12 +20,21 @@
             <div class="jumbotron text-center">
                     <h2> {{ question }}</h2>
                     <br></br>
-                    <div class="btn-group-vertical " role="group">
-                        <button v-on:click="checkAnswer(answerA)" type="button" class="btn btn-outline-dark" id="answer1"><b>{{ answerA }}</b></button>
-                        <button v-on:click="checkAnswer(answerB)" type="button" class="btn btn-outline-dark" id="answer2"><b>{{ answerB }}</b></button>
-                        <button v-on:click="checkAnswer(answerC)" type="button" class="btn btn-outline-dark" id="answer3"><b>{{ answerC }}</b></button>
-                        <button v-on:click="checkAnswer(answerD)" type="button" class="btn btn-outline-dark" id="answer4"><b>{{ answerD }}</b></button>
-                    </div>
+                <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-outline-dark active" id="label1">
+                      <input v-on:click="checkAnswer(answerA)" type="radio" name="options" id="answer1" autocomplete="off"> {{ answerA }}
+                    </label>
+                    <label class="btn btn-outline-dark active" id="label2">
+                      <input v-on:click="checkAnswer(answerB)" type="radio" name="options" id="answer2" autocomplete="off"> {{ answerB }}
+                    </label>
+                    <label class="btn btn-outline-dark active" id="label3">
+                      <input v-on:click="checkAnswer(answerC)" type="radio" name="options" id="answer3" autocomplete="off"> {{ answerC }}
+                    </label>
+                    <label class="btn btn-outline-dark active" id="label4">
+                        <input v-on:click="checkAnswer(answerD)" type="radio" name="options" id="answer4" autocomplete="off"> {{ answerD }}
+                      </label>
+                  </div>
+
                     <br></br>
                     <div class="btn-group-horizontal" role="group">
                         <button v-on:click="next()" type="button" class="btn btn-outline-success btn-lg" id="nextButton" disabled>Next</button>
@@ -106,6 +115,10 @@
                             this.answerC = dataArray[index].answer3;
                             this.answerD = dataArray[index].answer4;
                             document.getElementById("nextButton").disabled = true;
+                            document.getElementById('label1').classList.remove('active');
+                            document.getElementById('label2').classList.remove('active');
+                            document.getElementById('label3').classList.remove('active');
+                            document.getElementById('label4').classList.remove('active');
                         }
                         else
                         {
