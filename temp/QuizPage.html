@@ -40,6 +40,11 @@
                         <button v-on:click="next()" type="button" class="btn btn-outline-success btn-lg" id="nextButton" disabled>Next</button>
                     </div>
             </div>
+            <div class="position-relative"></div>
+                <div class="position-absolute bottom-0 right-0">
+                    <h3>{{ QID }}</h3>
+                </div>
+            </div>
         </div>
         <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
@@ -93,7 +98,8 @@
                     answerA: dataArray[index].answer1,
                     answerB: dataArray[index].answer2,
                     answerC: dataArray[index].answer3,
-                    answerD: dataArray[index].answer4
+                    answerD: dataArray[index].answer4,
+                    QID: dataArray[index].id
                 },
                 methods: {
                     checkAnswer : function (answer) {
@@ -114,6 +120,7 @@
                             this.answerB = dataArray[index].answer2;
                             this.answerC = dataArray[index].answer3;
                             this.answerD = dataArray[index].answer4;
+                            this.QID = dataArray[index].id
                             document.getElementById("nextButton").disabled = true;
                             document.getElementById('label1').classList.remove('active');
                             document.getElementById('label2').classList.remove('active');
@@ -127,9 +134,8 @@
                                 console.log("Correct answer");
                                 correctAnswers++;
                             }
-
-                            console.log("User scored: " + correctAnswers + "/" + dataArray.length);
-                            alert("User scored: " + correctAnswers + "/" + dataArray.length);
+                            sessionStorage.setItem('score', correctAnswers);
+                            location.href = "TestResults.html";
                         }
                     }
                 }
