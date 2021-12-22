@@ -42,7 +42,7 @@
             </div>
             <div class="position-relative"></div>
                 <div class="position-absolute bottom-0 right-0">
-                    <h3>{{ QID }}</h3>
+                    <h3>Test</h3>
                 </div>
             </div>
         </div>
@@ -77,19 +77,26 @@
             let size = sessionStorage.getItem('TestSize');
             let index = 0;
             let dataArray = [];
-            let correctAnswers = 0;
+            let firestoreElementArray = [];
+            let correctUserAnswers = 0;
             let selectedAnswer = "";
+            let answers = [];   
+            let correctDBAnswers = [];
             
             db.collection(level.toString()).get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     dataArray.push(doc.data());
                 });
-
                 //Randomise order of array
                 shuffleArray(dataArray);
                 //Truncate array to chosen test size
                 dataArray = dataArray.slice(0, size);
                 console.log("Question array length: " + dataArray.length);
+
+                for (var i = 0; i < dataArray.length; i++)
+                {
+                    correctDBAnswers.push(dataArray[i].correct);
+                }
 
                 var app = new Vue({
                 el: '#app',
@@ -98,13 +105,14 @@
                     answerA: dataArray[index].answer1,
                     answerB: dataArray[index].answer2,
                     answerC: dataArray[index].answer3,
-                    answerD: dataArray[index].answer4,
-                    QID: dataArray[index].id
+                    answerD: dataArray[index].answer4
+                    //QID: dataArray[index].id
                 },
                 methods: {
                     checkAnswer : function (answer) {
                         document.getElementById("nextButton").disabled = false;
                         selectedAnswer = answer;
+                        answers.push(answer);
                     },
                     next : function () {
                         if (index < dataArray.length - 1)
@@ -112,7 +120,7 @@
                             if (selectedAnswer == dataArray[index].correct)
                             {
                                 console.log("Correct answer");
-                                correctAnswers++;
+                                correctUserAnswers++;
                             }
                             index++;
                             this.question = dataArray[index].question;
@@ -120,7 +128,7 @@
                             this.answerB = dataArray[index].answer2;
                             this.answerC = dataArray[index].answer3;
                             this.answerD = dataArray[index].answer4;
-                            this.QID = dataArray[index].id
+                            //this.QID = dataArray[index].id
                             document.getElementById("nextButton").disabled = true;
                             document.getElementById('label1').classList.remove('active');
                             document.getElementById('label2').classList.remove('active');
@@ -132,9 +140,19 @@
                             if (selectedAnswer == dataArray[index -1].correct)
                             {
                                 console.log("Correct answer");
-                                correctAnswers++;
+                                correctUserAnswers++;
                             }
-                            sessionStorage.setItem('score', correctAnswers);
+
+                            var questionsArray = [];
+                            for (var i = 0; i < dataArray.length; i++)
+                            {
+                                questionsArray.push(dataArray[i].question);
+                            }
+
+                            sessionStorage.setItem('score', correctUserAnswers);
+                            sessionStorage.setItem('questionArray', JSON.stringify(questionsArray));
+                            sessionStorage.setItem('answerArray', JSON.stringify(answers));
+                            sessionStorage.setItem('correctAnswers', JSON.stringify(correctDBAnswers));
                             location.href = "TestResults.html";
                         }
                     }

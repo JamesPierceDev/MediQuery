@@ -23,6 +23,9 @@
                     <span class="badge bg-primary">{{ score }} / {{ testSize }}</span>
                 </h2>
             </div>
+            <div id="resultList">
+
+            </div>
         </div>
     </body>
 </html>
@@ -39,8 +42,53 @@
                 testSize: sessionStorage.getItem('TestSize')
             },
             methods: {
+                createList : function(){
+                    let array = JSON.parse(sessionStorage.getItem('questionArray'));
+                    let userAnswers = JSON.parse(sessionStorage.getItem('answerArray'));
+                    let correctAnswers = JSON.parse(sessionStorage.getItem('correctAnswers'));
 
-            }
+                    for (i = 0; i < array.length; i++)
+                    {
+                        //Setup jumbotron
+                        var jumbo = document.createElement("div");
+                        jumbo.className = "jumbotron";
+
+                        var heading = document.createElement("h3");
+                        heading.innerHTML = "Question";
+
+                        var question = document.createElement("h3");
+                        question.innerHTML = array[i];
+
+                        jumbo.appendChild(heading);
+                        jumbo.appendChild(question);
+
+                        var list = document.createElement("ul");
+                        var item1 = document.createElement('li');
+                        var item2 = document.createElement('li');
+
+                        item1.appendChild(document.createTextNode("Your answer: " + userAnswers[i]));
+                        item2.appendChild(document.createTextNode("Correct answer: " + correctAnswers[i]));
+                        list.appendChild(item1);
+                        list.appendChild(item2);
+                        jumbo.appendChild(list);
+
+                        if (userAnswers[i] == correctAnswers[i])
+                        {
+                            jumbo.classList.add("bg-success");
+                        }
+                        else
+                        {
+                            jumbo.classList.add("bg-danger");
+                        }
+
+                        //Append jumbotron to div
+                        document.getElementById("resultList").appendChild(jumbo);   
+                    }
+                }
+            },
+            created : function(){
+                    this.createList();
+                }
         })
     </script>
     <!--
