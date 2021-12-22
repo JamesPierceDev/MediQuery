@@ -21,10 +21,10 @@
                     <h2> {{ question }}</h2>
                     <br></br>
                     <div class="btn-group-vertical " role="group">
-                        <button v-on:click="checkAnswer(answerA)" type="button" class="btn btn-primary" id="answer1"><b>{{ answerA }}</b></button>
-                        <button v-on:click="checkAnswer(answerB)" type="button" class="btn btn-success" id="answer2"><b>{{ answerB }}</b></button>
-                        <button v-on:click="checkAnswer(answerC)" type="button" class="btn btn-danger" id="answer3"><b>{{ answerC }}</b></button>
-                        <button v-on:click="checkAnswer(answerD)" type="button" class="btn btn-warning" id="answer4"><b>{{ answerD }}</b></button>
+                        <button v-on:click="checkAnswer(answerA)" type="button" class="btn btn-outline-dark" id="answer1"><b>{{ answerA }}</b></button>
+                        <button v-on:click="checkAnswer(answerB)" type="button" class="btn btn-outline-dark" id="answer2"><b>{{ answerB }}</b></button>
+                        <button v-on:click="checkAnswer(answerC)" type="button" class="btn btn-outline-dark" id="answer3"><b>{{ answerC }}</b></button>
+                        <button v-on:click="checkAnswer(answerD)" type="button" class="btn btn-outline-dark" id="answer4"><b>{{ answerD }}</b></button>
                     </div>
                     <br></br>
                     <div class="btn-group-horizontal" role="group">
@@ -66,11 +66,17 @@
             let correctAnswers = 0;
             let selectedAnswer = "";
             
-            db.collection(level.toString()).limit(size).get().then((querySnapshot) => {
+            db.collection(level.toString()).get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     dataArray.push(doc.data());
-                    console.log("DOC ID: " + doc.id);
                 });
+
+                //Randomise order of array
+                shuffleArray(dataArray);
+                //Truncate array to chosen test size
+                dataArray = dataArray.slice(0, size);
+                console.log("Question array length: " + dataArray.length);
+
                 var app = new Vue({
                 el: '#app',
                 data: {
@@ -121,24 +127,17 @@
                 return null;
             });
             
-
-            /*
-            if (type == "Category")
+            function shuffleArray (array)
             {
-
-            }
-            else
-            {
-                if (size == 20)
+                for (var i = array.length - 1; i > 0; i--)
                 {
-
-                }
-                else
-                {
-
+                    var j = Math.floor(Math.random() * (i + 1));
+                    var temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
                 }
             }
-            */
+
         </script>
         <!--
             END : VueJS scripting
