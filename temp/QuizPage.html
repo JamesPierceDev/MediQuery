@@ -76,12 +76,10 @@
             let type = sessionStorage.getItem('TestType');
             let size = sessionStorage.getItem('TestSize');
             let index = 0;
-            let dataArray = [];
-            let firestoreElementArray = [];
-            let correctUserAnswers = 0;
-            let selectedAnswer = "";
-            let answers = [];   
-            let correctDBAnswers = [];
+            let dataArray = []; //List of firestore data snapshot documents from DB
+            let selectedAnswer = ""; //Answer selected by the user for current question
+            let answers = []; //List of answers submitted by user
+            let correctDBAnswers = []; //List of correct answers to each DB question
             
             db.collection(level.toString()).get().then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
@@ -116,11 +114,6 @@
                         answers.push(selectedAnswer);
                         if (index < dataArray.length - 1)
                         {
-                            if (selectedAnswer == dataArray[index].correct)
-                            {
-                                console.log("Correct answer");
-                                correctUserAnswers++;
-                            }
                             index++;
                             this.question = dataArray[index].question;
                             this.answerA = dataArray[index].answer1;
@@ -136,19 +129,12 @@
                         }
                         else
                         {
-                            if (selectedAnswer == dataArray[index -1].correct)
-                            {
-                                console.log("Correct answer");
-                                correctUserAnswers++;
-                            }
-
                             var questionsArray = [];
                             for (var i = 0; i < dataArray.length; i++)
                             {
                                 questionsArray.push(dataArray[i].question);
                             }
 
-                            sessionStorage.setItem('score', correctUserAnswers);
                             sessionStorage.setItem('questionArray', JSON.stringify(questionsArray));
                             sessionStorage.setItem('answerArray', JSON.stringify(answers));
                             sessionStorage.setItem('correctAnswers', JSON.stringify(correctDBAnswers));

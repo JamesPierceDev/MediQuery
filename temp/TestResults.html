@@ -35,10 +35,12 @@
         START : VueJS scripting
     -->
     <script>
+        let scoreValue = 0;
+
         var app = new Vue({
             el:'#results',
             data: {
-                score: sessionStorage.getItem('score'),
+                score: scoreValue,
                 testSize: sessionStorage.getItem('TestSize')
             },
             methods: {
@@ -47,6 +49,15 @@
                     let userAnswers = JSON.parse(sessionStorage.getItem('answerArray'));
                     let correctAnswers = JSON.parse(sessionStorage.getItem('correctAnswers'));
 
+                    for (var i = 0; i < userAnswers.length; i++)
+                    {
+                        if (userAnswers[i] == correctAnswers[i])
+                        {
+                            scoreValue++;
+                        }
+                    }
+                    this.score = scoreValue;
+                    
                     for (i = 0; i < array.length; i++)
                     {
                         //Setup jumbotron
