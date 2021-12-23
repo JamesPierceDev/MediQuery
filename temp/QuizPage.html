@@ -106,15 +106,14 @@
                     answerB: dataArray[index].answer2,
                     answerC: dataArray[index].answer3,
                     answerD: dataArray[index].answer4
-                    //QID: dataArray[index].id
                 },
                 methods: {
                     checkAnswer : function (answer) {
                         document.getElementById("nextButton").disabled = false;
                         selectedAnswer = answer;
-                        answers.push(answer);
                     },
                     next : function () {
+                        answers.push(selectedAnswer);
                         if (index < dataArray.length - 1)
                         {
                             if (selectedAnswer == dataArray[index].correct)
@@ -128,7 +127,7 @@
                             this.answerB = dataArray[index].answer2;
                             this.answerC = dataArray[index].answer3;
                             this.answerD = dataArray[index].answer4;
-                            //this.QID = dataArray[index].id
+
                             document.getElementById("nextButton").disabled = true;
                             document.getElementById('label1').classList.remove('active');
                             document.getElementById('label2').classList.remove('active');
