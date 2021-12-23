@@ -42,7 +42,7 @@
             </div>
             <div class="position-relative"></div>
                 <div class="position-absolute bottom-0 right-0">
-                    <h3>Test</h3>
+                    <h3>{{ questionID }}</h3>
                 </div>
             </div>
         </div>
@@ -103,7 +103,8 @@
                     answerA: dataArray[index].answer1,
                     answerB: dataArray[index].answer2,
                     answerC: dataArray[index].answer3,
-                    answerD: dataArray[index].answer4
+                    answerD: dataArray[index].answer4,
+                    questionID : dataArray[index].QID
                 },
                 methods: {
                     checkAnswer : function (answer) {
