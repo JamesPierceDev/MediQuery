@@ -44,6 +44,9 @@
                 <div class="position-absolute bottom-0 right-0">
                     <h3>{{ questionID }}</h3>
                 </div>
+                <div class="float-right">
+                    <h3>{{ progressIndex }}</h3>
+                </div>
             </div>
         </div>
         <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
@@ -104,7 +107,8 @@
                     answerB: dataArray[index].answer2,
                     answerC: dataArray[index].answer3,
                     answerD: dataArray[index].answer4,
-                    questionID : dataArray[index].QID
+                    questionID : dataArray[index].QID,
+                    progressIndex : index + " / " + size
                 },
                 methods: {
                     checkAnswer : function (answer) {
@@ -122,6 +126,7 @@
                             this.answerC = dataArray[index].answer3;
                             this.answerD = dataArray[index].answer4;
                             this.questionID = dataArray[index].QID;
+                            this.progressIndex = index + " / " + dataArray.length;
 
                             document.getElementById("nextButton").disabled = true;
                             document.getElementById('label1').classList.remove('active');
