@@ -5,11 +5,13 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://kit.fontawesome.com/a3d2e349c2.js" crossorigin="anonymous"></script>
 
 <html>
     <nav class="navbar-light bg-light">
         <a class="navbar-brand" href="index.html">
             <img src="images/icon.png" width="30" height="30" class="d-inline-block align-top" alt=""> MediQuery MCQ app</a>
+
     </nav>
     <head>
         <title>MediQuery</title>
@@ -17,23 +19,63 @@
 
     <body>
         <div class="container">
-            <h1 class="display-4">Select your clinical level</h1>
-            <div class="row justify-content-evenly" style="height: 100px;">
-                <div class="col-sm-3" style="text-align: center; height: 100%;" >
-                    <a class="btn btn-warning btn-lg" href="TestType.html" role="button" 
-                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'cfr')} WriteToSessionStorage();">CFR</a>
+            <h1 class="display-4" style="text-align: center;">Select your clinical level</h1>
+            <br>
+            <br>
+            <div class="card-group">
+                <div class="card bg-info shadow" style="height: 400px;">
+                    <a class="btn" style="height: 400px;" href="TestType.html" role="button" id="farButton" onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'far')} WriteToSessionStorage();" 
+                    onmouseover="(
+                        function() {
+                            document.getElementById('farButton').style.opacity = 0.5;
+                        }
+                    )();"
+                    onmouseout="(
+                        function() {
+                            document.getElementById('farButton').style.opacity = 1;
+                        }
+                    )();">
+                        <div class="card-body">
+                            <h2 class="card-title">First Aid <br> Responder</h5>
+                            <i class="fa-solid fa-bandage fa-4x" style="padding-top: 100px;"></i>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-sm-3" style="text-align: center; height: 100%;">
-                    <a class="btn btn-danger btn-lg" href="TestType.html" role="button"
-                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'far')} WriteToSessionStorage();">FAR</a>
+                <div class="card bg-danger shadow" style="height: 400px;">
+                    <a class="btn" style="height: 400px;" href="TestType.html" role="button" id="efrButton" onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'efr')} WriteToSessionStorage();" 
+                    onmouseover="(
+                        function() {
+                            document.getElementById('efrButton').style.opacity = 0.5;
+                        }
+                    )();"
+                    onmouseout="(
+                        function() {
+                            document.getElementById('efrButton').style.opacity = 1;
+                        }
+                    )();">
+                        <div class="card-body">
+                            <h2 class="card-title">Emergency First Responder</h5>
+                                <i class="fa-solid fa-star-of-life fa-4x" style="padding-top: 100px;"></i>
+                        </div>
+                    </a>
                 </div>
-                <div class="col-sm-3" style="text-align: center; height: 100%;">
-                    <a class="btn btn-success btn-lg" href="TestType.html" role="button"
-                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'efr')} WriteToSessionStorage()">EFR</a>
-                </div>
-                <div class="col-sm-3" style="text-align: center; height: 100%;">
-                    <a class="btn btn-primary btn-lg" href="TestType.html" role="button"
-                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'emt')} WriteToSessionStorage();">EMT</a>
+                <div class="card bg-success shadow" style="height: 400px;">
+                    <a class="btn" style="height: 400px;" href="TestType.html" role="button" id="emtButton" onclick="function WriteToSessionStorage(){sessionStorage.setItem('level', 'emt')} WriteToSessionStorage();" 
+                    onmouseover="(
+                        function() {
+                            document.getElementById('emtButton').style.opacity = 0.5;
+                        }
+                    )();"
+                    onmouseout="(
+                        function() {
+                            document.getElementById('emtButton').style.opacity = 1;
+                        }
+                    )();">
+                        <div class="card-body">
+                            <h2 class="card-title">Emergency Medical Technician</h5>
+                                <i class="fa-solid fa-syringe fa-4x" style="padding-top: 100px;"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
