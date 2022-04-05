@@ -4,7 +4,8 @@
 <script src="js/jquery.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>`
+<script src="https://kit.fontawesome.com/a3d2e349c2.js" crossorigin="anonymous"></script>
 
 <html>
     <nav class="navbar-light bg-light">
@@ -17,15 +18,64 @@
 
     <body>
         <div class="container">
-            <div class="jumbotron">
-                <h1 class="display-4">Select test type</h1>
-                <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="Category.html" role="button"
-                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('TestType', 'Category')} WriteToSessionStorage();"><strike>Single Category</strike></a>
-                    <br></br>
-                    <a class="btn btn-success btn-lg" href="TestSize.html" role="button"
-                    onclick="function WriteToSessionStorage(){sessionStorage.setItem('TestType', 'Full')} WriteToSessionStorage();">Full Test</a>
-                </p>
+            <h1 class="display-4" style="text-align: center;">Select test type</h1>
+            <br>
+            <br>
+            <div class="card-group">
+                <div class="card bg-info shadow border-dark" style="height: 400px;">
+                    <a class="btn" style="height: 400px;" href="" role="button" id="categoryButton" onclick="function WriteToSessionStorage(){sessionStorage.setItem('TestType', 'Category')} WriteToSessionStorage();" 
+                    onmouseover="(
+                        function() {
+                            document.getElementById('categoryButton').style.opacity = 0.5;
+                        }
+                    )();"
+                    onmouseout="(
+                        function() {
+                            document.getElementById('categoryButton').style.opacity = 1;
+                        }
+                    )();">
+                        <div class="card-body">
+                            <h2 class="card-title">Category</h5>
+                                <i class="fa-regular fa-rectangle-list fa-4x" style="padding-top: 100px;"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="card bg-danger shadow border-dark" style="height: 400px;">
+                    <a class="btn" style="height: 400px;" href="" role="button" id="arcadeButton" onclick="function WriteToSessionStorage(){sessionStorage.setItem('TestType', 'Arcade')} WriteToSessionStorage();" 
+                    onmouseover="(
+                        function() {
+                            document.getElementById('arcadeButton').style.opacity = 0.5;
+                        }
+                    )();"
+                    onmouseout="(
+                        function() {
+                            document.getElementById('arcadeButton').style.opacity = 1;
+                        }
+                    )();">
+                        <div class="card-body">
+                            <h2 class="card-title">Arcade Mode</h5>
+                                <i class="fa-regular fa-circle-play fa-4x" style="padding-top: 100px;"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="card bg-success shadow border-dark" style="height: 400px;">
+                    <a class="btn" style="height: 400px;" href="TestSize.html" role="button" id="fullButton" onclick="function WriteToSessionStorage(){sessionStorage.setItem('TestType', 'Full')} WriteToSessionStorage();" 
+                    onmouseover="(
+                        function() {
+                            document.getElementById('fullButton').style.opacity = 0.5;
+                        }
+                    )();"
+                    onmouseout="(
+                        function() {
+                            document.getElementById('fullButton').style.opacity = 1;
+                        }
+                    )();">
+                        <div class="card-body">
+                            <h2 class="card-title">Full test</h5>
+                                <i class="fa-regular fa-square-check fa-4x" style="padding-top: 100px;"></i>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </body>
