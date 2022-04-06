@@ -7,25 +7,36 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
 <html>
-    <nav class="navbar-light bg-light">
+    <nav class="navbar-light bg-primary">
         <a class="navbar-brand" href="index.html">
-            <img src="images/icon.png" width="30" height="30" class="d-inline-block align-top" alt=""> MediQuery MCQ app</a>
+            <img src="images/icon.png" width="30" height="30" class="d-inline-block align-top" alt=""> MediQuery</a>
     </nav>
     <head>
         <title>MediQuery</title>
     </head>
 
     <body>
+        <style>
+            body {
+                background-image: url('images/background.png');
+            }
+        </style>
+
         <div class="container">
-            <div class="jumbotron">
-                <h1 class="display-4" style="text-align: center;">Welcome to MediQuery!</h1>
-                <p class="lead" style="text-align: center;">An MCQ test generator for student First Responders</p>
-                <p class="lead">
+            <h1 class="display-4" style="text-align: center;">Welcome to MediQuery!</h1>
+            <p class="lead" style="text-align: center;">An MCQ test generator for student First Responders</p>
+            <div class="row">
+                <div class="col text-center" style="padding-top: 100px;">
                     <a class="btn btn-primary btn-lg" href="ClinicalLevel.html" role="button">Take a test!</a>
-                </p>
+                </div>
             </div>
         </div>
     <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
     </body>
+
+    <nav class="navbar-light bg-primary fixed-bottom">
+        <a class="navbar-brand">
+            <p class="text-sm-start" style="text-align: center;"></p>
+    </nav>
 </html>
