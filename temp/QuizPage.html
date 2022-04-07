@@ -117,7 +117,7 @@
                     answerC: dataArray[index].answer3,
                     answerD: dataArray[index].answer4,
                     questionID : dataArray[index].QID,
-                    progressIndex : index + " / " + size
+                    progressIndex : (index + 1) + " / " + size
                 },
                 methods: {
                     checkAnswer : function (answer) {
@@ -135,7 +135,7 @@
                             this.answerC = dataArray[index].answer3;
                             this.answerD = dataArray[index].answer4;
                             this.questionID = dataArray[index].QID;
-                            this.progressIndex = index + " / " + dataArray.length;
+                            this.progressIndex = (index + 1) + " / " + dataArray.length;
 
                             document.getElementById("nextButton").disabled = true;
                             document.getElementById('label1').classList.remove('active');
