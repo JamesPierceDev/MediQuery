@@ -91,8 +91,82 @@
             let selectedAnswer = ""; //Answer selected by the user for current question
             let answers = []; //List of answers submitted by user
             let correctDBAnswers = []; //List of correct answers to each DB question
-            
-            db.collection(level.toString()).get().then((querySnapshot) => {
+
+            if (type == 'Medications')
+            {
+                db.collection(level.toString()).where('category','==','medications').get().then((querySnapshot) => {0
+                querySnapshot.forEach((doc) => {
+                    dataArray.push(doc.data());
+                });
+
+                //Randomise order of array
+                shuffleArray(dataArray);
+                console.log("DB SIZE: " + dataArray.length);
+                //Truncate array to chosen test size
+                dataArray = dataArray.slice(0, size);
+                console.log("Question array length: " + dataArray.length);
+
+                for (var i = 0; i < dataArray.length; i++)
+                {
+                    correctDBAnswers.push(dataArray[i].correct);
+                }
+
+                var app = new Vue({
+                el: '#app',
+                data: {
+                    question: dataArray[index].question,
+                    answerA: dataArray[index].answer1,
+                    answerB: dataArray[index].answer2,
+                    answerC: dataArray[index].answer3,
+                    answerD: dataArray[index].answer4,
+                    questionID : dataArray[index].QID,
+                    progressIndex : (index + 1) + " / " + size
+                },
+                methods: {
+                    checkAnswer : function (answer) {
+                        document.getElementById("nextButton").disabled = false;
+                        selectedAnswer = answer;
+                    },
+                    next : function () {
+                        answers.push(selectedAnswer);
+                        if (index < dataArray.length - 1)
+                        {
+                            index++;
+                            this.question = dataArray[index].question;
+                            this.answerA = dataArray[index].answer1;
+                            this.answerB = dataArray[index].answer2;
+                            this.answerC = dataArray[index].answer3;
+                            this.answerD = dataArray[index].answer4;
+                            this.questionID = dataArray[index].QID;
+                            this.progressIndex = (index + 1) + " / " + dataArray.length;
+
+                            document.getElementById("nextButton").disabled = true;
+                            document.getElementById('label1').classList.remove('active');
+                            document.getElementById('label2').classList.remove('active');
+                            document.getElementById('label3').classList.remove('active');
+                            document.getElementById('label4').classList.remove('active');
+                        }
+                        else
+                        {
+                            var questionsArray = [];
+                            for (var i = 0; i < dataArray.length; i++)
+                            {
+                                questionsArray.push(dataArray[i].question);
+                            }
+
+                            sessionStorage.setItem('questionArray', JSON.stringify(questionsArray));
+                            sessionStorage.setItem('answerArray', JSON.stringify(answers));
+                            sessionStorage.setItem('correctAnswers', JSON.stringify(correctDBAnswers));
+                            location.href = "TestResults.html";
+                        }
+                    }
+                }
+            })
+            })
+            }
+            else
+            {
+                db.collection(level.toString()).get().then((querySnapshot) => {0
                 querySnapshot.forEach((doc) => {
                     dataArray.push(doc.data());
                 });
@@ -164,6 +238,7 @@
                 console.log("Error querying database - QuizPage.html", error);
                 return null;
             });
+            }
             
             function shuffleArray (array)
             {
